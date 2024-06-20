@@ -1,8 +1,8 @@
 # Esp32Python
 
-https://youtube.com/playlist?list=PL-3SnJmahyb5mQLq7RgG6HNIUMwXzgDy-&si=uQZo_DZwBbALXBjn
-
 ## FW
+
+https://www.youtube.com/watch?v=ApOwrmX0TB0
 
 1. python.exe -m venv venv
 1. pip install esptool
@@ -21,3 +21,6 @@ https://youtube.com/playlist?list=PL-3SnJmahyb5mQLq7RgG6HNIUMwXzgDy-&si=uQZo_DZw
 > pin2.off()
 
 ## Coding
+
+1. pip install adafruit-ampy
+1. ampy.exe --port COM6 run .\blink.py
