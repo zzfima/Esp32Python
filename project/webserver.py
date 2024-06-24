@@ -56,7 +56,10 @@ def web_page():
        <meta content="width=device-width, initial-scale=1" name="viewport"></meta>   
       </head>   
       <body>   
-        <center><h2>ESP32 Web Server in MicroPython </h2></center>   
+        <center><h2>ESP32 Web Server in MicroPython </h2></center>
+        <center><p>SSID: """
+        + wifi_credentials.ssid
+        + """.</p></center>  
         <center>   
          <form>   
           <button name="LED" type="submit" value="1"> LED ON </button>   
@@ -103,3 +106,4 @@ while True:
 
     # Socket close()
     conn.close()
+
