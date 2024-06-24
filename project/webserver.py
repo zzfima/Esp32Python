@@ -4,40 +4,49 @@ import network
 sta = network.WLAN(network.STA_IF)
 sta.active(True)
 sta.scan()
+
+upload file into esp:
+Installing PlatformIO IDE Extension on VS Code
+create folder data
+put file inside
 """
 
 import machine
 import network
-import wifi_credentials
 import socket
 
 # configure led pin
 led = machine.Pin(2, machine.Pin.OUT)
 led.off()
 
-# ************************
-# Configure the ESP32 wifi as STAtion mode.
-sta = network.WLAN(network.STA_IF)
-if not sta.isconnected():
+print("Configure the ESP32 wifi as STAtion mode")
+station = network.WLAN(network.STA_IF)
+if not station.isconnected():
     print("connecting to network...")
-    sta.active(True)
-    sta.connect(wifi_credentials.ssid, wifi_credentials.password)
-    while not sta.isconnected():
+    station.active(True)
+    station.connect("wifi cat 2.4ghz-pro-2.4G", "maximus11")
+    while not station.isconnected():
+        print("not connected!")
         pass
-print("network config:", sta.ifconfig())
+print("network config:", station.ifconfig())
 
 
 # ************************
 # Configure the socket connection
 # over TCP/IP
 
+
 # AF_INET - use Internet Protocol v4 addresses
 # SOCK_STREAM means that it is a TCP socket.
 # SOCK_DGRAM means that it is a UDP socket.
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind(("", 80))  # specifies that the socket is reachable
+print("socket create...")
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+print("socket bind...")
+sock.bind(('',80))  # specifies that the socket is reachable
 #                 by any address the machine happens to have
-s.listen(5)  # max of 5 socket connections
+
+print("socket listen...")
+sock.listen(5)  # max of 5 socket connections
 
 
 # ************************
@@ -75,8 +84,8 @@ def web_page():
 
 
 while True:
-    # Socket accept()
-    conn, addr = s.accept()
+    print("Socket accept:")
+    conn, addr = sock.accept()
     print("Got connection from %s" % str(addr))
 
     # Socket receive()
