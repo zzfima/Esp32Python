@@ -161,3 +161,4 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 project/data/wifi_credentials.py
+project/wifi_credentials.py

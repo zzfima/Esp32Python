@@ -1,19 +1,8 @@
-"""
-Activate wifi and scan:
-import network
-sta = network.WLAN(network.STA_IF)
-sta.active(True)
-sta.scan()
-
-upload file into esp:
-Installing PlatformIO IDE Extension on VS Code
-create folder data
-put file inside
-"""
-
 import machine
 import network
 import socket
+import wifi_credentials
+
 
 # configure led pin
 led = machine.Pin(2, machine.Pin.OUT)
@@ -24,7 +13,7 @@ station = network.WLAN(network.STA_IF)
 if not station.isconnected():
     print("connecting to network...")
     station.active(True)
-    station.connect("wifi cat 2.4ghz-pro-2.4G", "maximus11")
+    station.connect(wifi_credentials.ssid, wifi_credentials.password)
     while not station.isconnected():
         print("not connected!")
         pass
@@ -42,7 +31,7 @@ print("network config:", station.ifconfig())
 print("socket create...")
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print("socket bind...")
-sock.bind(('',80))  # specifies that the socket is reachable
+sock.bind(("", 80))  # specifies that the socket is reachable
 #                 by any address the machine happens to have
 
 print("socket listen...")
