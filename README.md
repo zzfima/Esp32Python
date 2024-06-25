@@ -30,6 +30,8 @@ Close mobaXteram before running:
 
 ## Thonny
 
+https://randomnerdtutorials.com/getting-started-thonny-micropython-python-ide-esp32-esp8266/
+
 1. Connect to device
 1. Create files on device: wifi_credentials.py, blink.py. webserver code put into boot.py
 1. reboot device
