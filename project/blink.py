@@ -6,8 +6,8 @@ def blink():
     lap = 0
     while lap < 5:
         pin2.on()
-        time.sleep(1)
+        time.sleep(0.2)
         pin2.off()
-        time.sleep(1)
+        time.sleep(0.2)
         lap += 1
 
