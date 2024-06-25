@@ -25,4 +25,11 @@ https://www.youtube.com/watch?v=ApOwrmX0TB0
 1. pip install adafruit-ampy
 
 Close mobaXteram before running:
+
 1. ampy.exe --port COM6 run .\blink.py
+
+## Thonny
+
+1. Connect to device
+1. Create files on device: wifi_credentials.py, blink.py. webserver code put into boot.py
+1. reboot device
