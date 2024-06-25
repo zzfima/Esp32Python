@@ -2,7 +2,7 @@ import machine
 import network
 import socket
 import wifi_credentials
-
+import blink5times
 
 # configure led pin
 led = machine.Pin(2, machine.Pin.OUT)
@@ -42,12 +42,15 @@ sock.listen(5)  # max of 5 socket connections
 # Function for creating the
 # web page to be displayed
 def web_page():
-    if led.value() == 1:
-        led_state = "ON"
-        print("led is ON")
-    elif led.value() == 0:
+    if led.value() == 0:
         led_state = "OFF"
         print("led is OFF")
+    elif led.value() == 1:
+        led_state = "ON"
+        print("led is ON")
+    elif led.value() == 2:
+        led_state = "Blinking"
+        print("led is blinking 5 times")
 
     html_page = (
         """   
@@ -63,7 +66,8 @@ def web_page():
         <center>   
          <form>   
           <button name="LED" type="submit" value="1"> LED ON </button>   
-          <button name="LED" type="submit" value="0"> LED OFF </button>   
+          <button name="LED" type="submit" value="0"> LED OFF </button>
+          <button name="LED" type="submit" value="2"> LED Blink 5 times</button>
          </form>   
         </center>   
         <center><p>LED is now <strong>"""
@@ -88,8 +92,10 @@ while True:
 
     # Socket send()
     request = str(request)
-    led_on = request.find("/?LED=1")
     led_off = request.find("/?LED=0")
+    led_on = request.find("/?LED=1")
+    led_blinking = request.find("/?LED=2")
+
     if led_on == 6:
         print("LED ON")
         print(str(led_on))
@@ -98,6 +104,10 @@ while True:
         print("LED OFF")
         print(str(led_off))
         led.value(0)
+    elif led_blinking == 6:
+        print("LED Blinking")
+        print(str(led_blinking))
+        blink5times.blink() 
     response = web_page()
     conn.send("HTTP/1.1 200 OK\n")
     conn.send("Content-Type: text/html\n")
@@ -106,4 +116,3 @@ while True:
 
     # Socket close()
     conn.close()
-
